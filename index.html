@@ -57,8 +57,30 @@
       messageContent.classList.add('message-content');
       messageContent.textContent = data.username + ': ' + data.message;
       item.appendChild(messageContent);
-      document.getElementById('messages').appendChild(item);
-      window.scrollTo(0, document.body.scrollHeight);
+      messagesList.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);  // Scroll to the bottom
+    });
+
+    // Listen for new users joining
+    socket.on('user joined', function(message) {
+      var item = document.createElement('li');
+      var systemMessage = document.createElement('div');
+      systemMessage.classList.add('system-message');
+      systemMessage.textContent = message;
+      item.appendChild(systemMessage);
+      messagesList.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);  // Scroll to the bottom
+    });
+
+    // Listen for users leaving
+    socket.on('user left', function(message) {
+      var item = document.createElement('li');
+      var systemMessage = document.createElement('div');
+      systemMessage.classList.add('system-message');
+      systemMessage.textContent = message;
+      item.appendChild(systemMessage);
+      messagesList.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);  // Scroll to the bottom
     });
   </script>
 </body>

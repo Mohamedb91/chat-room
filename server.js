@@ -23,6 +23,10 @@ io.on('connection', (socket) => {
   // Handle setting the username
   socket.on('set username', (name) => {
     username = name;
+
+    // Notify all clients (including the new one) that a user has joined
+    io.emit('user joined', `${username} has joined the chat!`);
+
     console.log(`${username} connected`);
   });
 
@@ -34,10 +38,12 @@ io.on('connection', (socket) => {
   // Handle disconnection
   socket.on('disconnect', () => {
     if (username) {
+      io.emit('user left', `${username} has left the chat.`);
       console.log(`${username} disconnected`);
     }
   });
 });
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

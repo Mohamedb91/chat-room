@@ -43,7 +43,7 @@ body, html {
   .message-content {
     display: inline-block; /* Adjusts the width of the content based on message size */
     padding: 8px;
-    background-color: var(--color-brand);
+    background-color: var(--color-msgBar);
     border-radius: 5px;
     max-width: 80%; /* Restricts the maximum width of the message */
     word-wrap: break-word; /* Wraps long words within the element */
